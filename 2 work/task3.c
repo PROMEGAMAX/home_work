@@ -2,16 +2,16 @@
 #include <stdlib.h>
 
 int main(){
-    int N;
+    int arraySize;
     int matrix[100][100];
     int value = 1;
 
     printf("Введите N\n");
-    scanf("%d", &N);
+    scanf("%d", &arraySize);
 
-    for(int i = 0; i < N; i++){
-        for(int j = 0; j < N; j++){
-            if(j >= N - 1 - i){
+    for(int i = 0; i < arraySize; i++){
+        for(int j = 0; j < arraySize; j++){
+            if(j >= arraySize - 1 - i){
                 matrix[i][j] = 1;
             } else{
                 matrix[i][j] = 0;
@@ -19,9 +19,9 @@ int main(){
             }
         }
 
-    printf("Матрица %d x %d:\n", N, N);
-    for (int i = 0; i < N; i++) {
-        for (int j = 0; j < N; j++) {
+    printf("Матрица %d x %d:\n", arraySize, arraySize);
+    for (int i = 0; i < arraySize; i++) {
+        for (int j = 0; j < arraySize; j++) {
             printf("%d\t", matrix[i][j]);
         }
         printf("\n");

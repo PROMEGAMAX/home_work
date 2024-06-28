@@ -1,11 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void fillSpiral(int N, int matrix[N][N]) {
+void fillSpiral(int arraySize, int matrix[arraySize][arraySize]) {
     int value = 1;
-    int top = 0, bottom = N - 1;
-    int left = 0, right = N - 1;
-    while(value <= N * N){
+    int top = 0, bottom = arraySize - 1;
+    int left = 0, right = arraySize - 1;
+    while(value <= arraySize * arraySize){
         
         for (int j = left; j <= right; j++) {
             matrix[top][j] = value++;
@@ -30,16 +30,16 @@ void fillSpiral(int N, int matrix[N][N]) {
 }
 
 int main() {
-    int N;
+    int arraySize;
     printf("Введите размер матрицы N: ");
-    scanf("%d", &N);
+    scanf("%d", &arraySize);
 
-    int matrix[N][N];
-    fillSpiral(N, matrix);
+    int matrix[arraySize][arraySize];
+    fillSpiral(arraySize, matrix);
 
-    printf("Спиральная матрица %d x %d:\n", N, N);
-        for(int i = 0; i < N; i++){
-        for(int j = 0; j < N; j++){
+    printf("Спиральная матрица %d x %d:\n", arraySize, arraySize);
+        for(int i = 0; i < arraySize; i++){
+        for(int j = 0; j < arraySize; j++){
          printf("%d\t", matrix[i][j]);   
         }
     printf("\n");
