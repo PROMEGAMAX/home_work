@@ -40,13 +40,13 @@ void show_abonent() {
     }
 }
 
-void del_abonent(int index){
-    if(index < count && index >= 0){
-        phonebook[index].name[0] = '\0';
-        phonebook[index].second_name[0] = '\0';
-        phonebook[index].tel[0] = '\0';
-    }
-    else{
+void del_abonent(int index) {
+    if(index < count && index >= 0) {
+        for(int i = index; i < count - 1; i++) {
+            phonebook[i] = phonebook[i + 1];
+        }
+        count--;
+    } else {
         printf("Неверный индекс абонента\n");
     }
 }
