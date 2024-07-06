@@ -1,14 +1,21 @@
 #include <stdio.h>
 
-void printBinary(unsigned int number) {
-    for (int i = 31; i >= 0; i--) {
-        printf("%d", (number >> i) & 1);
-        if (i % 8 == 0) {
+void printBinary(int n) {
+    unsigned int mask = 1 << 31;
+    
+    for (int i = 0; i < 32; i++) {
+        if (n & mask) {
+            printf("1");
+        } else {
+            printf("0");
+        }
+        mask >>= 1;
+            if ((i + 1) % 8 == 0 && i != 31) {
             printf(" ");
         }
     }
-    printf("\n");
-}
+        printf("\n");
+    }
 
 int main() {
     int number;        

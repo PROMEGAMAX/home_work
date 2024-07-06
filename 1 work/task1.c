@@ -10,7 +10,7 @@ void printBinary(int n) {
             printf("0");
         }
         mask >>= 1;
-            if (i % 8 == 0) {
+            if ((i + 1) % 8 == 0 && i != 31) {
             printf(" ");
         }
     }
