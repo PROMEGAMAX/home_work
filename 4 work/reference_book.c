@@ -51,22 +51,23 @@ void del_abonent(int index) {
     }
 }
 
-void search_abonent(){
+void search_abonent() {
     char search_name[100];
-    printf("Введите имя абонента");
+    printf("Введите имя абонента: ");
     scanf("%s", search_name);
     int found = 0;
-    for (int i = 0; i < count; i++){
-        if(strcmp(phonebook[i].name, search_name) == 0){
+    for (int i = 0; i < count; i++) {
+        if (strcmp(phonebook[i].name, search_name) == 0) {
             printf("Абонент найден\n");
             printf("Имя: %s\n", phonebook[i].name);
             printf("Фамилия: %s\n", phonebook[i].second_name);
             printf("Телефон: %s\n", phonebook[i].tel);
             found = 1;
+            break;
         }
-        else{
-            printf("Абонент не найден");
-        }
+    }
+    if (!found) {
+        printf("Абонент не найден\n");
     }
 }
 
