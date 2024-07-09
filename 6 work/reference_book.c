@@ -43,19 +43,19 @@ void show_abonent() {
 
 void del_abonent(int index) {
     if (index < count && index >= 0) {
-        for (int i = index; i < count - 1; i++) {
-            phonebook[i] = phonebook[i + 1];
-        }
+        phonebook[index] = phonebook[count - 1];
         count--;
         phonebook = realloc(phonebook, count * sizeof(person));
         if (count > 0 && phonebook == NULL) {
             printf("Ошибка выделения памяти\n");
             exit(1);
         }
+        printf("Абонент удален\n");
     } else {
         printf("Неверный индекс абонента\n");
     }
 }
+
 
 void search_abonent() {
     char search_name[100];
