@@ -6,7 +6,7 @@
 
 Как я это выполнял.
 
-Компилируем проект с нужными флагами gcc -o vulnerable vulnerable.c -fno-stack-protector -no-pie
+Компилируем проект с нужными флагами gcc -o task2 task2.c -fno-stack-protector -no-pie
 Запускаем проект через gdb отладчик gdb ./task2
 Через disassemble ищем инструкцию, где выводится "Access granted!\n" и получаю адрес этой инструкции
 Узнаю адрес возврата и создаю input.txt файл. Адрес возврата 0x4011d8 в формате little-endian будет использоваться последовательность байт \xd8\x11\x40\x00\x00\x00\x00\x00.
