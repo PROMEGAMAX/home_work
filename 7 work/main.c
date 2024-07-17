@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include "calc.h"
 
 void print_menu() {
     printf("ГЛАВНОЕ МЕНЮ\n");
@@ -11,10 +12,6 @@ void print_menu() {
 }
 
 int main(){
-    int div(int a, int b);
-    int sub(int a, int b);
-    int mul(int a, int b);
-    int add(int a, int b);
     int choice = 0;
     int num1, num2;
 

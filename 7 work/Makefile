@@ -18,7 +18,7 @@ $(TARGET): $(MAIN_OBJS) $(LIB)
 $(LIB): $(LIB_OBJS)
 	ar rcs $@ $^
 
-%.o: %.c
+%.o: %.c calc.h
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
