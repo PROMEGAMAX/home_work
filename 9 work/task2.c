@@ -16,7 +16,11 @@ void handle_input(int ch, int *current_panel, char *paths[2],
     highlight[*current_panel]++;
     break;
   case '\t':
-    *current_panel = (*current_panel == PANEL1) ? PANEL2 : PANEL1;
+    if (*current_panel == PANEL1) {
+      *current_panel = PANEL2;
+    } else {
+      *current_panel = PANEL1;
+    }
     break;
   case '\n': {
     DIR *dir;
