@@ -4,7 +4,7 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 
-void create_processes1() {
+void create_and_monitor_processes() {
     pid_t pid3, pid4;
     int status3, status4;
 
@@ -45,7 +45,7 @@ void create_processes1() {
     }
 }
 
-void create_processes2() {
+void create_and_check_process() {
     pid_t pid5;
     int status5;
 
