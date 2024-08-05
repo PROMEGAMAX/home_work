@@ -80,7 +80,7 @@ int main() {
         printf("Процесс 1:\n");
         printf("PID: %d\n", getpid());
         printf("PPID: %d\n", getppid());
-        create_processes1();
+        create_and_monitor_processes();
         exit(0);
     }
 
@@ -99,7 +99,7 @@ int main() {
         printf("Процесс 2:\n");
         printf("PID: %d\n", getpid());
         printf("PPID: %d\n", getppid());
-        create_processes2();
+        create_and_check_process();
         exit(0);
     }
 
