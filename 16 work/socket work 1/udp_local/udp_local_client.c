@@ -9,6 +9,18 @@
 #define SOCKET_PATH "/tmp/udp_local_socket"
 #define CLIENT_SOCKET_PATH "/tmp/udp_local_client_socket"
 
+void print_socket_address(int sockfd) {
+  struct sockaddr_un addr;
+  socklen_t addr_len = sizeof(addr);
+
+  if (getsockname(sockfd, (struct sockaddr *)&addr, &addr_len) == -1) {
+    perror("getsockname failed");
+    return;
+  }
+
+  printf("Socket address: %s\n", addr.sun_path);
+}
+
 int main() {
   int client_socket;
   struct sockaddr_un server_addr, client_addr;
@@ -30,6 +42,8 @@ int main() {
     close(client_socket);
     exit(EXIT_FAILURE);
   }
+
+  print_socket_address(client_socket);
 
   memset(&server_addr, 0, sizeof(server_addr));
   server_addr.sun_family = AF_LOCAL;

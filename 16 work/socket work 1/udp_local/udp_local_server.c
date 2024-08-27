@@ -17,6 +17,18 @@ void reverse_string(char *str) {
   }
 }
 
+void print_socket_address(int sockfd) {
+  struct sockaddr_un addr;
+  socklen_t addr_len = sizeof(addr);
+
+  if (getsockname(sockfd, (struct sockaddr *)&addr, &addr_len) == -1) {
+    perror("getsockname failed");
+    return;
+  }
+
+  printf("Socket address: %s\n", addr.sun_path);
+}
+
 int main() {
   int server_socket;
   struct sockaddr_un server_addr, client_addr;
@@ -39,6 +51,8 @@ int main() {
     close(server_socket);
     exit(EXIT_FAILURE);
   }
+
+  print_socket_address(server_socket);
 
   printf("Server is running...\n");
 
