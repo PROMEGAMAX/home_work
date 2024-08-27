@@ -6,7 +6,7 @@
 #include <sys/un.h>
 #include <unistd.h>
 
-#define SOCKET_PATH "/tmp/tcp_local_socket3"
+#define SOCKET_PATH "/tmp/tcp_local_socket10"
 
 void reverse_string(char *str) {
   int length = strlen(str);
@@ -15,6 +15,18 @@ void reverse_string(char *str) {
     str[i] = str[length - 1 - i];
     str[length - 1 - i] = temp;
   }
+}
+
+void print_socket_info(int socket_fd, const char *label) {
+  struct sockaddr_un addr;
+  socklen_t len = sizeof(addr);
+
+  if (getsockname(socket_fd, (struct sockaddr *)&addr, &len) == -1) {
+    perror("getsockname failed");
+    return;
+  }
+
+  printf("%s - Socket path: %s\n", label, addr.sun_path);
 }
 
 int main() {
@@ -40,7 +52,9 @@ int main() {
     exit(EXIT_FAILURE);
   }
 
-  if(listen(server_socket,  3) == -1) {
+  print_socket_info(server_socket, "Server");
+
+  if (listen(server_socket, 3) == -1) {
     perror("Listen failed");
     close(server_socket);
     exit(EXIT_FAILURE);
@@ -48,12 +62,13 @@ int main() {
 
   printf("Server is running...\n");
 
-  client_socket = accept(server_socket,  (struct sockaddr *)&client_addr, &client_addr_len);
-  if(client_socket == -1){
+  client_socket =
+      accept(server_socket, (struct sockaddr *)&client_addr, &client_addr_len);
+  if (client_socket == -1) {
     perror("Accept failed");
     close(server_socket);
     exit(EXIT_FAILURE);
-  } 
+  }
 
   while (1) {
     ssize_t recv_len = recv(client_socket, buffer, sizeof(buffer) - 1, 0);
@@ -62,9 +77,9 @@ int main() {
       close(client_socket);
       close(server_socket);
       exit(EXIT_FAILURE);
-    } else if (recv == 0){
-        printf("Client disconnect\n");
-        break;  
+    } else if (recv_len == 0) {
+      printf("Client disconnect\n");
+      break;
     }
 
     buffer[recv_len] = '\0';

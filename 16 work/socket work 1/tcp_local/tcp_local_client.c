@@ -6,7 +6,19 @@
 #include <sys/un.h>
 #include <unistd.h>
 
-#define SOCKET_PATH "/tmp/tcp_local_socket3"
+#define SOCKET_PATH "/tmp/tcp_local_socket10"
+
+void print_peer_info(int socket_fd) {
+  struct sockaddr_un addr;
+  socklen_t len = sizeof(addr);
+
+  if (getpeername(socket_fd, (struct sockaddr *)&addr, &len) == -1) {
+    perror("getpeername failed");
+    return;
+  }
+
+  printf("Connected to - Socket path: %s\n", addr.sun_path);
+}
 
 int main() {
   int client_socket;
@@ -23,11 +35,14 @@ int main() {
   server_addr.sun_family = AF_LOCAL;
   strcpy(server_addr.sun_path, SOCKET_PATH);
 
-  if (connect(client_socket, (struct sockaddr *)&server_addr, sizeof(server_addr)) == -1) {
+  if (connect(client_socket, (struct sockaddr *)&server_addr,
+              sizeof(server_addr)) == -1) {
     perror("Connect failed");
     close(client_socket);
     exit(EXIT_FAILURE);
   }
+
+  print_peer_info(client_socket);
 
   while (1) {
     printf("Enter message to send: ");
