@@ -6,7 +6,7 @@
 #include <sys/un.h>
 #include <unistd.h>
 
-#define SERVER_PORT 12345
+#define SERVER_PORT 12342
 
 void reverse_string(char *str) {
   int length = strlen(str);
@@ -58,17 +58,18 @@ int main() {
   printf("Server is running...\n");
 
   while (1) {
-    ssize_t recv_len =
-        recvfrom(server_socket, buffer, sizeof(buffer) - 1, 0,
+    ssize_t recv_len = recvfrom(server_socket, buffer, sizeof(buffer) - 1, 0,
                  (struct sockaddr *)&client_addr, &client_addr_len);
-    if (recv_len == -1) {
-      perror("Receive failed");
-      close(server_socket);
-      exit(EXIT_FAILURE);
-    }
+  if (recv_len == -1) {
+    perror("Receive failed");
+    close(server_socket);
+    exit(EXIT_FAILURE);
+}
 
-    buffer[recv_len] = '\0';
-    printf("Received message: %s\n", buffer);
+buffer[recv_len] = '\0';
+printf("Received message: %s\n", buffer);
+printf("From client: %s:%d\n", inet_ntoa(client_addr.sin_addr), ntohs(client_addr.sin_port));
+
 
     reverse_string(buffer);
 
